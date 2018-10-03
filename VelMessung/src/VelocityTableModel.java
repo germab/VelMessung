@@ -36,8 +36,18 @@ public class VelocityTableModel extends AbstractTableModel{
     
     @Override
     public Object getValueAt(int i, int i1) {
+        
         Measurement m = messungen.get(i);
-        return m;
+        
+        switch (i1) {
+            case 0: return m.getDate();
+            case 1: return m.getTime();
+            case 2: return m.getKennzeichen();
+            case 3: return m.getV_gemessen();
+            case 4: return m.getV_erlaubt();
+            case 5: return m.getV_gemessen()-m.getV_erlaubt();
+            default: return "???";
+        }
     }
     
     public void add(Measurement m){

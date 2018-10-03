@@ -1,3 +1,8 @@
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,6 +15,10 @@
  */
 public class VelocityDlg extends javax.swing.JDialog {
 
+    private boolean ok=false;
+    private DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    private DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("HH:mm");
+    private Measurement m;
     /**
      * Creates new form VelocityDlg
      */
@@ -27,22 +36,94 @@ public class VelocityDlg extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jLabel1 = new javax.swing.JLabel();
+        tfDate = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        tfTime = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        tfKennzeichen = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        tfGemessen = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        tfErlaubt = new javax.swing.JTextField();
+        btOk = new javax.swing.JButton();
+        btCancel = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new java.awt.GridLayout(6, 2));
+
+        jLabel1.setText("Datum:");
+        getContentPane().add(jLabel1);
+
+        tfDate.setText("08.10.2013");
+        getContentPane().add(tfDate);
+
+        jLabel2.setText("Uhrzeit:");
+        getContentPane().add(jLabel2);
+
+        tfTime.setText("07:55");
+        getContentPane().add(tfTime);
+
+        jLabel3.setText("Kennzeichen:");
+        getContentPane().add(jLabel3);
+
+        tfKennzeichen.setText("GU-RASER1");
+        getContentPane().add(tfKennzeichen);
+
+        jLabel4.setText("V-Gemessen:");
+        getContentPane().add(jLabel4);
+
+        tfGemessen.setText("123");
+        getContentPane().add(tfGemessen);
+
+        jLabel5.setText("V-Erlaubt:");
+        getContentPane().add(jLabel5);
+
+        tfErlaubt.setText("80");
+        getContentPane().add(tfErlaubt);
+
+        btOk.setText("Übernehmen");
+        btOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btOkActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btOk);
+
+        btCancel.setText("Abbrechen");
+        btCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCancelActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btCancel);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOkActionPerformed
+        ok=true;
+        LocalDate date = LocalDate.parse(tfDate.getText(),dtf1);
+        LocalTime time = LocalTime.parse(tfTime.getText(), dtf2);
+        String kennzeichen = tfKennzeichen.getText();
+        int gemessen = Integer.parseInt(tfGemessen.getText());
+        int erlaubt = Integer.parseInt(tfErlaubt.getText());
+        m = new Measurement(date,time,kennzeichen,gemessen,erlaubt);
+        this.dispose();
+    }//GEN-LAST:event_btOkActionPerformed
+
+    private void btCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelActionPerformed
+        ok = false;
+        this.dispose();
+    }//GEN-LAST:event_btCancelActionPerformed
+
+    public Measurement getMessung(){
+        return m;
+    }
+    
+    public boolean isOk(){
+        return ok;
+    }
     /**
      * @param args the command line arguments
      */
@@ -86,5 +167,17 @@ public class VelocityDlg extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btCancel;
+    private javax.swing.JButton btOk;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField tfDate;
+    private javax.swing.JTextField tfErlaubt;
+    private javax.swing.JTextField tfGemessen;
+    private javax.swing.JTextField tfKennzeichen;
+    private javax.swing.JTextField tfTime;
     // End of variables declaration//GEN-END:variables
 }
