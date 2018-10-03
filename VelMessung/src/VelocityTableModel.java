@@ -15,6 +15,7 @@ import javax.swing.table.AbstractTableModel;
 public class VelocityTableModel extends AbstractTableModel{
 
     private ArrayList<Measurement> messungen = new ArrayList();
+    private static String[] COLNAMES = {"Datum","Uhrzeit","Kennzeichen","Gemessen","Erlaubt","Übertretung"};
     
     @Override
     public int getRowCount() {
@@ -26,6 +27,13 @@ public class VelocityTableModel extends AbstractTableModel{
         return 6;
     }
 
+    @Override
+    public String getColumnName(int i) {
+        return COLNAMES[i];
+    }
+
+    
+    
     @Override
     public Object getValueAt(int i, int i1) {
         Measurement m = messungen.get(i);

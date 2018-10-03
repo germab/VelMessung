@@ -1,3 +1,6 @@
+
+import java.awt.Dialog;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,11 +13,13 @@
  */
 public class VelocityGUI extends javax.swing.JFrame {
 
+    private VelocityTableModel model = new VelocityTableModel();
     /**
      * Creates new form VelocityGUI
      */
     public VelocityGUI() {
         initComponents();
+        table.setModel(model);
     }
 
     /**
@@ -36,6 +41,11 @@ public class VelocityGUI extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
 
         miAdd.setText("jMenuItem1");
+        miAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAddActionPerformed(evt);
+            }
+        });
         jPopupMenu1.add(miAdd);
 
         miDelete.setText("jMenuItem1");
@@ -77,6 +87,16 @@ public class VelocityGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void miAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddActionPerformed
+        VelocityDlg dialog = new VelocityDlg(this,true);
+        dialog.setVisible(true);
+        Measurement m = null;
+        if(dialog.isOk()){
+            m = dialog.getMessung();
+            model.add(m);
+        }
+    }//GEN-LAST:event_miAddActionPerformed
 
     /**
      * @param args the command line arguments
