@@ -75,8 +75,8 @@ public class VelocityTableModel extends AbstractTableModel{
         return sum/messungen.size();
     }
     
-    public void load()throws Exception{
-        File f = new File("./data.bin");
+    public void load(File f)throws Exception{
+        
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
         Object m = null;
         while((m=ois.readObject())!=null){
@@ -84,8 +84,8 @@ public class VelocityTableModel extends AbstractTableModel{
         }
     }
     
-    public void save()throws Exception{
-        File f = new File("./data.bin");
+    public void save(File f)throws Exception{
+        
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
         
         for (Measurement m : messungen) {

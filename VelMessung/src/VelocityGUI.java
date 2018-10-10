@@ -1,7 +1,8 @@
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.File;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -148,18 +149,34 @@ public class VelocityGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_miAvgActionPerformed
 
     private void miLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLoadActionPerformed
-        try {
-            model.load();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        JFileChooser chooser = new JFileChooser(".");
+        chooser.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(".ser", "ser");
+        chooser.addChoosableFileFilter(filter);
+        int result = chooser.showOpenDialog(null);
+        if(result == JFileChooser.APPROVE_OPTION){
+            File f = chooser.getSelectedFile();
+            try {
+                model.load(f);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }//GEN-LAST:event_miLoadActionPerformed
 
     private void miSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSaveActionPerformed
-        try {
-            model.save();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        JFileChooser chooser = new JFileChooser(".");
+        chooser.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(".ser", "ser");
+        chooser.addChoosableFileFilter(filter);
+        int result = chooser.showOpenDialog(null);
+        if(result == chooser.APPROVE_OPTION){
+            File f = chooser.getSelectedFile();
+            try {
+                model.save(f);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }//GEN-LAST:event_miSaveActionPerformed
 
