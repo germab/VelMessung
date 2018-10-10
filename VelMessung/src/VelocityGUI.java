@@ -1,4 +1,6 @@
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /*
@@ -42,6 +44,8 @@ public class VelocityGUI extends javax.swing.JFrame {
         table = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        miSave = new javax.swing.JMenuItem();
+        miLoad = new javax.swing.JMenuItem();
 
         miAdd.setText("Hinzufügen");
         miAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -88,6 +92,23 @@ public class VelocityGUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(table);
 
         jMenu1.setText("Datei");
+
+        miSave.setText("Speichern");
+        miSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miSaveActionPerformed(evt);
+            }
+        });
+        jMenu1.add(miSave);
+
+        miLoad.setText("Laden");
+        miLoad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miLoadActionPerformed(evt);
+            }
+        });
+        jMenu1.add(miLoad);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -125,6 +146,22 @@ public class VelocityGUI extends javax.swing.JFrame {
         double avg = model.avg();
         JOptionPane.showMessageDialog(this,String.format("Durchschnittliche Übertretung: %.2f", avg));
     }//GEN-LAST:event_miAvgActionPerformed
+
+    private void miLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLoadActionPerformed
+        try {
+            model.load();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_miLoadActionPerformed
+
+    private void miSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSaveActionPerformed
+        try {
+            model.save();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_miSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,6 +207,8 @@ public class VelocityGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem miAdd;
     private javax.swing.JMenuItem miAvg;
     private javax.swing.JMenuItem miDelete;
+    private javax.swing.JMenuItem miLoad;
+    private javax.swing.JMenuItem miSave;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }
