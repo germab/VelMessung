@@ -1,5 +1,7 @@
 
 import java.awt.Dialog;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,6 +21,7 @@ public class VelocityGUI extends javax.swing.JFrame {
      */
     public VelocityGUI() {
         initComponents();
+        //model.add(new Measurement(LocalDate.now(), LocalTime.now(), "GU-RASER1", 123, 80));
         table.setModel(model);
         table.setDefaultRenderer(Object.class, new VelocityTableRenderer());
     }
@@ -35,13 +38,14 @@ public class VelocityGUI extends javax.swing.JFrame {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         miAdd = new javax.swing.JMenuItem();
         miDelete = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         miAvg = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
-        miAdd.setText("jMenuItem1");
+        miAdd.setText("Hinzufügen");
         miAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 miAddActionPerformed(evt);
@@ -49,13 +53,22 @@ public class VelocityGUI extends javax.swing.JFrame {
         });
         jPopupMenu1.add(miAdd);
 
-        miDelete.setText("jMenuItem1");
+        miDelete.setText("Löschen");
+        miDelete.setToolTipText("");
+        miDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miDeleteActionPerformed(evt);
+            }
+        });
         jPopupMenu1.add(miDelete);
+        jPopupMenu1.add(jSeparator1);
 
-        miAvg.setText("jMenuItem1");
+        miAvg.setText("Durchschnitt");
         jPopupMenu1.add(miAvg);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jScrollPane1.setComponentPopupMenu(jPopupMenu1);
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -68,6 +81,7 @@ public class VelocityGUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        table.setComponentPopupMenu(jPopupMenu1);
         jScrollPane1.setViewportView(table);
 
         jMenu1.setText("Datei");
@@ -98,6 +112,11 @@ public class VelocityGUI extends javax.swing.JFrame {
             model.add(m);
         }
     }//GEN-LAST:event_miAddActionPerformed
+
+    private void miDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miDeleteActionPerformed
+        int[] idx = table.getSelectedRows();
+        model.delete(idx);
+    }//GEN-LAST:event_miDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,6 +158,7 @@ public class VelocityGUI extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenuItem miAdd;
     private javax.swing.JMenuItem miAvg;
     private javax.swing.JMenuItem miDelete;
